@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500&display=swap');
+
+:root {
+  --font-size: 17px;
+  --btn-size: 19px;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  margin: 50px;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+ul:target {
+  display: none;
+}
+.main-list {
+  counter-reset: list-counter;
+  width: 500px;
+}
+
+.main-list > li:first-child {
+  border: none;
+  
+}
+
+.main-list > li:first-child::before {
+  border: none;
+}
+
+.main-list > li:first-child > span {
+  background: none;
+  margin: 0 0 10px 5px;
+  width: auto;
+}
+
+.main-list > li:first-child > span::before {
+  content: none;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 25px;
+  margin: 0;
+  font-size: var(--font-size);
+}
+
+li {
+  border-left: 1px solid black;
+  padding: 0;
+  position: relative;
+  line-height: calc(var(--font-size) * 1.3);
+}
+
+li::before {
+  display: inline-block;
+  position: absolute;
+  content: "";
+  border-bottom: 1px solid black;
+  height: calc(var(--font-size)/2);
+  width: 8px;
+  box-sizing: border-box;
+}
+
+li span {
+  display: inline-block;
+  margin: 0 0 0 13px;
+  padding: 0 0 0 3px;
+  line-height: var(--font-size);
+  font-weight: lighter;
+  width: 100%;
+}
+/* 
+.nestedList {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  transform-origin: top;
+  transform: scaleY(1);
+  transition: 1s;
+  perspective: 100px;
+}
+
+.nestedList > li {
+  background-color: white;
+  transition: transform 1s;
+} */
+
+.main-list > li > .nestedList > li > span::before {
+  display: block;
+  counter-increment: list-counter;
+  content: attr(data-group-name) " " counter(list-counter);
+}
+
+.main-list > li > .nestedList > li > .nestedList {
+  counter-reset: second-nesting;
+}
+
+.main-list > li > .nestedList > li > .nestedList > li > span::before {
+  display: block;
+  counter-increment: second-nesting;
+  content: attr(data-group-name) " " counter(second-nesting);
+}
+
+.main-list > li > .nestedList > li > .nestedList > li > .nestedList {
+  counter-reset: third-nesting;
+}
+
+.main-list > li > .nestedList > li > .nestedList > li > .nestedList > li span::before {
+  display: block;
+  counter-increment: third-nesting;
+  content: attr(data-group-name) " " counter(second-nesting) "." counter(third-nesting);
+}
+
+.main-list > li > .nestedList > li:last-child > span::before {
+  display: block;
+  content: "";
+}
+
+.main-list > li > .nestedList > .group:last-child > span {
+  margin-left: 10px;
+}
+
+li:nth-child(odd) > span {
+  background-color: #f2f2f2;
+}
+
+
+li:nth-child(even) > span {
+  background-color: #ffffff;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  vertical-align: top;
+  width: 19px;
+  height: 19px;
+  line-height: 18px;
+  margin: calc(var(--font-size) / 2 - 9.5px) 0 2.5px 16.5px;
+  box-shadow: 0 0 0 2px white;
+  background-color: #0082e6;
+  color: white;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 23px;
+  user-select: none;
+  transition: .5s;
+}
+
+
+.collapsed {
+  width: 19px;
+  height: 19px;
+  line-height: 21px;
+}
+.collapsed::before {
+  position: absolute;
+  content: "\002B";
+}
+
+.collapsed ~ ul {
+  display: none;
+  /* transform: scaleY(0);
+  height: 0%;
+  font-size: 0px;
+  visibility: collapse;
+  position: relative;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  transform: translateY(-100%); */
+}
+
+.unfold::before {
+  position: absolute;
+  content: "\2012";
+}
+
+.unfold ~ .nestedList > li:last-child {
+  display: block;
+  /* transform: scaleY(1);
+  height: 100%;
+  font-size: 20px;
+  z-index: 1;
+  position: relative;
+  visibility: visible;
+  transform: translateY(0%); */
+  
+}
+/* 
+.unfold ~ .nestedList > li:last-child > span {
+  height: 0px;
+} */
+
+.radio {
+  border-radius: 50%;
+}
+
+.checkbox {
+  border-radius: 4px;
+}
+
+li.group > span {
+  background: none !important;
+  margin-left: 0;
+  font-weight: 500 !important;
+  width: auto;
+}
+
+li.group::before {
+  display: inline-block;
+  position: absolute;
+  content: "";
+  border-bottom: 1px solid black;
+  height: calc(var(--font-size) / 2);
+  width: 8px;
+  box-sizing: border-box;
+}
+
+li:first-child:before {   /* borders for every first li in each list */
+  display: inline-block;
+  position: absolute;
+  content: "";
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  height: calc(var(--font-size)/2 + var(--font-size) / 2);
+  width: 8px;
+  box-sizing: border-box;
+  top: calc(-1 * var(--font-size) / 2);
+  left: -1px;
+  z-index: -100;
+}
+
+li:last-child {
+  border-left: none;
+  
+}
+
+li:last-child::before {
+  border-left: 1px solid black;
+}
